@@ -42,6 +42,7 @@ public class Controller {
 		return iMovimientoRepository.findAll();
 	}
 	
+	
 	@GetMapping(path="/AllCuenta")
 	public @ResponseBody
 	List<Cuenta> getAllCuenta() {
