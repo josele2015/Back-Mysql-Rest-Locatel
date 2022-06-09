@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity(name = "movimiento")
@@ -8,7 +10,8 @@ import java.math.BigDecimal;
         @Index(name = "fk_movimiento_cuenta1_idx", columnList = "cuenta_iidcuenta")
 })
 //@Table(name = "movimiento")
-public class Movimiento {
+public class Movimiento  implements Serializable{
+	private static final long serialVersionUID=3;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "movimientotable")

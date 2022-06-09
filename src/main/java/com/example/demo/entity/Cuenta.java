@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity(name = "cuenta")
 @Table(name = "cuenta", indexes = {
@@ -13,7 +11,7 @@ import java.util.Set;
 })
 //@Table(name = "cuenta")
 public class Cuenta implements Serializable{
-
+	private static final long serialVersionUID=2;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "cuentatable")
     @Column(name = "IIDCUENTA", nullable = false)

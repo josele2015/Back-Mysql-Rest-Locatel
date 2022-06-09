@@ -3,8 +3,6 @@ package com.example.demo.entity;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity(name = "usuario")
 //@Table(name = "usuario",
@@ -14,7 +12,7 @@ import java.util.Set;
 @Table(name = "usuario",
         schema = "pruebalocatel")
 public class Usuario implements Serializable{
-//	private static final long serialVersionUID=-1;
+	private static final long serialVersionUID=1;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "UsuarioTable")
     @Column(name = "iidusuario", nullable = false)
