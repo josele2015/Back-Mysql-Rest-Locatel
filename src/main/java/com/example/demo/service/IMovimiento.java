@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
-public interface IMovimiento {
+import com.example.demo.entity.Movimiento;
 
+public interface IMovimiento {
+	public Movimiento getMovimiento(int iIDUsuario); 
+		
 }

@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity(name = "cuenta")
 @Table(name = "cuenta", indexes = {
         @Index(name = "fk_cuenta_usuario1_idx", columnList = "usuario_iidusuario")
 })
-//@Table(name = "cuenta")
 public class Cuenta implements Serializable{
 	private static final long serialVersionUID=2;
     @Id
@@ -31,19 +31,19 @@ public class Cuenta implements Serializable{
     private Boolean bActivo = false;
 
 //    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "usuario_i_id_usuario")
-//    private Usuario usuario;
+    @JoinColumn(name = "usuario_i_id_usuario")
+    private Usuario usuario;
     @Column(name = "dnumerocuenta", nullable = false, precision = 30)
     private BigDecimal dNumeroCuenta;
 
 
-//    public Usuario getUsuario() {
-//        return usuario;
-//    }
-//
-//    public void setUsuario(Usuario usuario) {
-//        this.usuario = usuario;
-//    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Boolean getBActivo() {
         return bActivo;
@@ -93,11 +93,11 @@ public class Cuenta implements Serializable{
         this.iIDCuenta = iIDCuenta;
     }
 
-////    @Override
-////    public int hashCode() {
-////        return Objects.hash(dNumeroCuenta, iIDCuenta, usuarioIidusuario);
-////    }
-//
+    @Override
+    public int hashCode() {
+        return Objects.hash(iIDCuenta, usuarioIidusuario,iValorInicial,dSaldo,bActivo,usuario,dNumeroCuenta);
+    }
+
     public Integer getiIDCuenta() {
         return iIDCuenta;
     }

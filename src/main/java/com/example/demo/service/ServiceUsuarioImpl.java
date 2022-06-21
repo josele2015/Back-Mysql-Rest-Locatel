@@ -14,12 +14,11 @@ public class ServiceUsuarioImpl implements IUsuario{
 	@Autowired 
 	@Qualifier("IUsuarioRepository")
 	IUsuarioRepository iUsuarioRepository;
+	
 	@Override
 	public Usuario getUsuarioLogin(String Usuario,String Password){
-		
-		return iUsuarioRepository. getUsuarioLogin(Usuario, Password);
+		return iUsuarioRepository.getUsuarioLogin(Usuario, Password);
 	}
-	
 	
 	public List<Usuario> findAll(){
 		return iUsuarioRepository.findAll();

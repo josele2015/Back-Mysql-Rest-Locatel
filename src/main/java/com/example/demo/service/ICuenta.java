@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
-public interface ICuenta {
+import java.util.List;
+import com.example.demo.entity.Cuenta;
 
+public interface ICuenta {
+	public List<Cuenta> getAllCuenta(int iIDUsuario);
 }

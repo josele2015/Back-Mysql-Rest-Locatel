@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.CuentaDao;
 import com.example.demo.dao.LoginDao;
+import com.example.demo.dao.MovimientoDao;
+import com.example.demo.dao.UsuarioDao;
 import com.example.demo.entity.Cuenta;
 import com.example.demo.entity.Movimiento;
 import com.example.demo.entity.Usuario;
@@ -24,6 +27,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import com.example.demo.repository.IUsuarioRepository;
 import com.example.demo.service.ServiceUsuarioImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,12 +39,11 @@ public class Controller {
 	@Autowired
 	@Qualifier("IUsuarioRepository")
 	private IUsuarioRepository iUsuarioRepository;
-	
 	@Autowired
+	@Qualifier("ICuentaRepository")
 	private ICuentaRepository iCuentaRepository;
 	@Autowired
 	private IMovimientoRepository iMovimientoRepository;
-	
 	@GetMapping(path="/AllUsuario")
 	public @ResponseBody
 	List<Usuario> getAllUsuario() {
@@ -65,16 +68,36 @@ public class Controller {
 
 	@PostMapping(path="/Login")
 	public @ResponseBody 
-	Usuario login(@RequestBody LoginDao loginDao ) {
+	UsuarioDao login(@RequestBody LoginDao loginDao ) {
 		log.info("Realizando Login");
 		//String token = getJWTToken(username);
 		Usuario usuario=new Usuario();
-		usuario =iUsuarioRepository.getUsuarioLogin(loginDao.getUsuario(), loginDao.getPassword()); 
-//		loginDao.settAliasUsuario(Usuario.getTAliasUsuario());
-//		loginDao.settNombreUsuario(Usuario.getTNombreUsuario());
-//		loginDao.setToken(token);		
-		return usuario;
-		
+		usuario =iUsuarioRepository.getUsuarioLogin(loginDao.getUsuario(), loginDao.getPassword());
+		UsuarioDao usuarioDao=new UsuarioDao();
+		if(usuario!=null ) {
+			usuarioDao.setbActivo(usuario.getBActivo());
+			usuarioDao.setId(usuario.getId());
+			usuarioDao.settAliasUsuario(usuario.getTAliasUsuario());
+			usuarioDao.settNombreUsuario(usuario.getTNombreUsuario());
+			usuarioDao.settPassword(usuario.getTPassword());
+			usuarioDao.setToken("vacio");
+		}else {
+			usuarioDao.setToken("El usuario no existe");
+		}
+		return usuarioDao;
+	}
+	
+	
+	@GetMapping(path="/GetAllCuenta")
+	public @ResponseBody 
+	List<CuentaDao> GetAllCuenta(@RequestBody int iIDUsuario) {
+		List<Cuenta> cuentas=new ArrayList();
+		cuentas =iCuentaRepository.getAllCuenta(iIDUsuario);
+		List<CuentaDao> ListCuentasDao=new ArrayList();
+		for(Cuenta cuenta:cuentas) {
+			
+		}
+		return ListCuentasDao;
 	}
 	
 //	private String getJWTToken(String username) {
